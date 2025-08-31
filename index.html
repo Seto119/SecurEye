@@ -11,10 +11,10 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#2563eb',
-                        secondary: '#1e40af',
-                        dark: '#1e293b',
-                        light: '#f8fafc',
+                        primary: '#2563eb', // Bleu plus lumineux
+                        secondary: '#1e40af', // Bleu plus foncé
+                        dark: '#1e293b',    // Gris très foncé (pour texte/arrière-plans)
+                        light: '#f8fafc',    // Blanc cassé (pour arrière-plans légers)
                     }
                 }
             }
@@ -27,102 +27,105 @@
             background-position: center;
         }
         
-        .article-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        .article-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Combiner les transitions */
         }
         
-        .transition-slow {
-            transition: all 0.3s ease;
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.05); /* Légère amélioration de l'ombre */
         }
+        
+        /* Transition lente déjà définie par Tailwind, mais on peut l'utiliser directement avec les classes */
+        /* .transition-slow { transition: all 0.3s ease; } */
     </style>
 </head>
-<body class="bg-gray-50 font-sans">
+<body class="bg-gray-50 font-sans antialiased">
     <!-- Navigation -->
     <nav class="bg-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center space-x-2">
-                <i class="fas fa-lock text-blue-600 text-2xl"></i>
-                <a href="#" class="text-xl font-bold text-gray-800">VPN Facile</a>
+                <i class="fas fa-lock text-primary text-2xl"></i>
+                <a href="#hero" class="text-xl font-bold text-gray-800">VPN Facile</a>
             </div>
             
             <!-- Mobile menu button -->
             <div class="md:hidden">
-                <button id="menu-toggle" class="text-gray-600 focus:outline-none">
+                <button id="menu-toggle" class="text-gray-600 focus:outline-none" aria-label="Ouvrir le menu" aria-expanded="false">
                     <i class="fas fa-bars text-2xl"></i>
                 </button>
             </div>
             
             <!-- Desktop Menu -->
             <div class="hidden md:flex space-x-8">
-                <a href="#" class="text-blue-600 font-medium">Accueil</a>
-                <a href="#" class="text-gray-600 hover:text-blue-600 transition-slow">Blog</a>
-                <a href="#" class="text-gray-600 hover:text-blue-600 transition-slow">Comparatifs</a>
-                <a href="#" class="text-gray-600 hover:text-blue-600 transition-slow">À propos</a>
-                <a href="#" class="text-gray-600 hover:text-blue-600 transition-slow">Contact</a>
+                <a href="#hero" class="text-primary font-medium hover:text-secondary transition-colors duration-300">Accueil</a>
+                <a href="#articles" class="text-gray-600 hover:text-primary transition-colors duration-300">Blog</a>
+                <a href="#comparatifs" class="text-gray-600 hover:text-primary transition-colors duration-300">Comparatifs</a>
+                <a href="#about" class="text-gray-600 hover:text-primary transition-colors duration-300">À propos</a>
+                <a href="#contact-footer" class="text-gray-600 hover:text-primary transition-colors duration-300">Contact</a>
             </div>
         </div>
         
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-white py-2 px-4 shadow-lg">
-            <a href="#" class="block py-2 text-blue-600 font-medium">Accueil</a>
-            <a href="#" class="block py-2 text-gray-600 hover:text-blue-600 transition-slow">Blog</a>
-            <a href="#" class="block py-2 text-gray-600 hover:text-blue-600 transition-slow">Comparatifs</a>
-            <a href="#" class="block py-2 text-gray-600 hover:text-blue-600 transition-slow">À propos</a>
-            <a href="#" class="block py-2 text-gray-600 hover:text-blue-600 transition-slow">Contact</a>
+            <a href="#hero" class="block py-2 text-primary font-medium hover:text-secondary transition-colors duration-300" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Accueil</a>
+            <a href="#articles" class="block py-2 text-gray-600 hover:text-primary transition-colors duration-300" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Blog</a>
+            <a href="#comparatifs" class="block py-2 text-gray-600 hover:text-primary transition-colors duration-300" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Comparatifs</a>
+            <a href="#about" class="block py-2 text-gray-600 hover:text-primary transition-colors duration-300" onclick="document.getElementById('mobile-menu').classList.add('hidden')">À propos</a>
+            <a href="#contact-footer" class="block py-2 text-gray-600 hover:text-primary transition-colors duration-300" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Contact</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero-bg text-white py-20 md:py-32">
+    <section id="hero" class="hero-bg text-white py-20 md:py-32">
         <div class="container mx-auto px-4 text-center">
             <h1 class="text-4xl md:text-5xl font-bold mb-4">VPN Facile</h1>
             <p class="text-xl md:text-2xl mb-8">Votre guide complet pour choisir le VPN idéal</p>
-            <p class="max-w-2xl mx-auto mb-8">Protégez votre vie privée en ligne avec nos recommandations expertes et nos comparatifs détaillés des meilleurs services VPN du marché.</p>
-            <a href="#" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-slow">Découvrir notre guide ultime</a>
+            <p class="max-w-2xl mx-auto mb-8 opacity-90">Protégez votre vie privée en ligne avec nos recommandations expertes et nos comparatifs détaillés des meilleurs services VPN du marché.</p>
+            <a href="#featured-articles" class="inline-block bg-primary hover:bg-secondary text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300">Découvrir notre guide ultime</a>
         </div>
     </section>
 
     <!-- Featured Articles -->
-    <section class="py-16 bg-white">
+    <section id="articles" class="py-16 bg-white">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Nos derniers articles</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Article 1 -->
-                <div class="article-card bg-white rounded-lg overflow-hidden shadow-md transition-slow">
+                <div class="article-card bg-white rounded-lg overflow-hidden shadow-md">
                     <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="VPN pour Netflix" class="w-full h-48 object-cover">
                     <div class="p-6">
-                        <span class="inline-block bg-blue-100 text-blue-600 text-xs px-2 py-1 rounded mb-2">Guide</span>
+                        <span class="inline-block bg-blue-100 text-primary text-xs px-2 py-1 rounded mb-2">Guide</span>
                         <h3 class="text-xl font-bold mb-2 text-gray-800">Les 5 meilleurs VPN pour Netflix en 2025</h3>
                         <p class="text-gray-600 mb-4">Découvrez quels VPN fonctionnent réellement avec Netflix et comment contourner les restrictions géographiques.</p>
-                        <a href="#" class="text-blue-600 font-medium inline-flex items-center">
+                        <a href="#" class="text-primary font-medium inline-flex items-center hover:text-secondary transition-colors duration-300">
                             Lire l'article <i class="fas fa-arrow-right ml-2"></i>
                         </a>
                     </div>
                 </div>
                 
                 <!-- Article 2 -->
-                <div class="article-card bg-white rounded-lg overflow-hidden shadow-md transition-slow">
+                <div class="article-card bg-white rounded-lg overflow-hidden shadow-md">
                     <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Comparatif VPN" class="w-full h-48 object-cover">
                     <div class="p-6">
                         <span class="inline-block bg-purple-100 text-purple-600 text-xs px-2 py-1 rounded mb-2">Comparatif</span>
                         <h3 class="text-xl font-bold mb-2 text-gray-800">ExpressVPN vs NordVPN : Le duel ultime</h3>
                         <p class="text-gray-600 mb-4">Notre analyse approfondie de ces deux géants du VPN pour vous aider à choisir le meilleur service.</p>
-                        <a href="#" class="text-blue-600 font-medium inline-flex items-center">
+                        <a href="#" class="text-primary font-medium inline-flex items-center hover:text-secondary transition-colors duration-300">
                             Lire l'article <i class="fas fa-arrow-right ml-2"></i>
                         </a>
                     </div>
                 </div>
                 
                 <!-- Article 3 -->
-                <div class="article-card bg-white rounded-lg overflow-hidden shadow-md transition-slow">
+                <div class="article-card bg-white rounded-lg overflow-hidden shadow-md">
                     <img src="https://images.unsplash.com/photo-1563206767-5b18f218e8de?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" alt="Sécurité en ligne" class="w-full h-48 object-cover">
                     <div class="p-6">
                         <span class="inline-block bg-green-100 text-green-600 text-xs px-2 py-1 rounded mb-2">Sécurité</span>
                         <h3 class="text-xl font-bold mb-2 text-gray-800">Comment protéger votre vie privée en ligne</h3>
                         <p class="text-gray-600 mb-4">Les meilleures pratiques et outils pour naviguer sur internet en toute sécurité et anonymat.</p>
-                        <a href="#" class="text-blue-600 font-medium inline-flex items-center">
+                        <a href="#" class="text-primary font-medium inline-flex items-center hover:text-secondary transition-colors duration-300">
                             Lire l'article <i class="fas fa-arrow-right ml-2"></i>
                         </a>
                     </div>
@@ -130,7 +133,7 @@
             </div>
             
             <div class="text-center mt-12">
-                <a href="#" class="inline-block border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white font-medium py-2 px-6 rounded-lg transition-slow">
+                <a href="#articles" class="inline-block border border-primary text-primary hover:bg-primary hover:text-white font-medium py-2 px-6 rounded-lg transition-colors duration-300">
                     Voir tous les articles
                 </a>
             </div>
@@ -138,7 +141,7 @@
     </section>
 
     <!-- Why Trust Us -->
-    <section class="py-16 bg-gray-100">
+    <section id="about" class="py-16 bg-gray-100">
         <div class="container mx-auto px-4">
             <div class="max-w-4xl mx-auto text-center">
                 <h2 class="text-3xl font-bold mb-6 text-gray-800">Pourquoi nous faire confiance ?</h2>
@@ -149,23 +152,23 @@
                 </p>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-10">
                     <div class="bg-white p-4 rounded-lg shadow-sm">
-                        <i class="fas fa-shield-alt text-blue-600 text-3xl mb-3"></i>
-                        <h3 class="font-bold mb-1">Sécurité</h3>
+                        <i class="fas fa-shield-alt text-primary text-3xl mb-3"></i>
+                        <h3 class="font-bold mb-1 text-gray-800">Sécurité</h3>
                         <p class="text-sm text-gray-600">Tests approfondis</p>
                     </div>
                     <div class="bg-white p-4 rounded-lg shadow-sm">
-                        <i class="fas fa-tachometer-alt text-blue-600 text-3xl mb-3"></i>
-                        <h3 class="font-bold mb-1">Vitesse</h3>
+                        <i class="fas fa-tachometer-alt text-primary text-3xl mb-3"></i>
+                        <h3 class="font-bold mb-1 text-gray-800">Vitesse</h3>
                         <p class="text-sm text-gray-600">Benchmarks réels</p>
                     </div>
                     <div class="bg-white p-4 rounded-lg shadow-sm">
-                        <i class="fas fa-eye-slash text-blue-600 text-3xl mb-3"></i>
-                        <h3 class="font-bold mb-1">Confidentialité</h3>
+                        <i class="fas fa-eye-slash text-primary text-3xl mb-3"></i>
+                        <h3 class="font-bold mb-1 text-gray-800">Confidentialité</h3>
                         <p class="text-sm text-gray-600">Politiques vérifiées</p>
                     </div>
                     <div class="bg-white p-4 rounded-lg shadow-sm">
-                        <i class="fas fa-dollar-sign text-blue-600 text-3xl mb-3"></i>
-                        <h3 class="font-bold mb-1">Prix</h3>
+                        <i class="fas fa-dollar-sign text-primary text-3xl mb-3"></i>
+                        <h3 class="font-bold mb-1 text-gray-800">Prix</h3>
                         <p class="text-sm text-gray-600">Meilleurs deals</p>
                     </div>
                 </div>
@@ -174,15 +177,15 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="py-16 bg-blue-600 text-white">
+    <section id="comparatifs" class="py-16 bg-primary text-white">
         <div class="container mx-auto px-4 text-center">
             <h2 class="text-3xl font-bold mb-4">Trouvez le meilleur VPN pour vous</h2>
-            <p class="text-xl mb-8 max-w-2xl mx-auto">Notre outil de recommandation personnalisé vous aide à choisir le VPN parfait selon vos besoins spécifiques.</p>
+            <p class="text-xl mb-8 max-w-2xl mx-auto opacity-90">Notre outil de recommandation personnalisé vous aide à choisir le VPN parfait selon vos besoins spécifiques.</p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#" class="bg-white text-blue-600 hover:bg-gray-100 font-bold py-3 px-6 rounded-lg transition-slow">
+                <a href="#" class="bg-white text-primary hover:bg-gray-100 font-bold py-3 px-6 rounded-lg transition-colors duration-300">
                     Essayer notre outil
                 </a>
-                <a href="#" class="border border-white text-white hover:bg-blue-700 font-bold py-3 px-6 rounded-lg transition-slow">
+                <a href="#articles" class="border border-white text-white hover:bg-secondary font-bold py-3 px-6 rounded-lg transition-colors duration-300">
                     Voir les comparatifs
                 </a>
             </div>
@@ -196,8 +199,8 @@
                 <h2 class="text-2xl font-bold mb-2 text-center text-gray-800">Restez informé</h2>
                 <p class="text-gray-600 text-center mb-6">Abonnez-vous à notre newsletter pour recevoir les derniers tests, comparatifs et offres exclusives.</p>
                 <form class="flex flex-col sm:flex-row gap-3">
-                    <input type="email" placeholder="Votre email" class="flex-grow px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-slow">
+                    <input type="email" placeholder="Votre email" class="flex-grow px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary" aria-label="Votre adresse email">
+                    <button type="submit" class="bg-primary hover:bg-secondary text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300">
                         S'abonner
                     </button>
                 </form>
@@ -207,12 +210,12 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-12">
+    <footer id="contact-footer" class="bg-dark text-white py-12">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
                     <div class="flex items-center space-x-2 mb-4">
-                        <i class="fas fa-lock text-blue-400 text-2xl"></i>
+                        <i class="fas fa-lock text-primary text-2xl"></i>
                         <span class="text-xl font-bold">VPN Facile</span>
                     </div>
                     <p class="text-gray-400">Votre guide indépendant pour choisir le meilleur service VPN et protéger votre vie privée en ligne.</p>
@@ -221,22 +224,22 @@
                 <div>
                     <h3 class="text-lg font-bold mb-4">Navigation</h3>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-slow">Accueil</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-slow">Blog</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-slow">Comparatifs</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-slow">À propos</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-slow">Contact</a></li>
+                        <li><a href="#hero" class="text-gray-400 hover:text-white transition-colors duration-300">Accueil</a></li>
+                        <li><a href="#articles" class="text-gray-400 hover:text-white transition-colors duration-300">Blog</a></li>
+                        <li><a href="#comparatifs" class="text-gray-400 hover:text-white transition-colors duration-300">Comparatifs</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition-colors duration-300">À propos</a></li>
+                        <li><a href="#contact-footer" class="text-gray-400 hover:text-white transition-colors duration-300">Contact</a></li>
                     </ul>
                 </div>
                 
                 <div>
                     <h3 class="text-lg font-bold mb-4">Catégories</h3>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-slow">Guides</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-slow">Comparatifs</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-slow">Sécurité</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-slow">Streaming</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-slow">Actualités</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Guides</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Comparatifs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Sécurité</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Streaming</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Actualités</a></li>
                     </ul>
                 </div>
                 
@@ -244,19 +247,19 @@
                     <h3 class="text-lg font-bold mb-4">Contact</h3>
                     <ul class="space-y-2">
                         <li class="flex items-center">
-                            <i class="fas fa-envelope text-blue-400 mr-2"></i>
+                            <i class="fas fa-envelope text-primary mr-2"></i>
                             <span class="text-gray-400">contact@vpnfacile.com</span>
                         </li>
                         <li class="flex items-center">
-                            <i class="fas fa-globe text-blue-400 mr-2"></i>
+                            <i class="fas fa-globe text-primary mr-2"></i>
                             <span class="text-gray-400">Paris, France</span>
                         </li>
                     </ul>
                     <div class="flex space-x-4 mt-4">
-                        <a href="#" class="text-gray-400 hover:text-white transition-slow"><i class="fab fa-twitter text-xl"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-slow"><i class="fab fa-facebook text-xl"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-slow"><i class="fab fa-instagram text-xl"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-slow"><i class="fab fa-youtube text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300" aria-label="Notre Twitter"><i class="fab fa-twitter text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300" aria-label="Notre Facebook"><i class="fab fa-facebook text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300" aria-label="Notre Instagram"><i class="fab fa-instagram text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300" aria-label="Notre Youtube"><i class="fab fa-youtube text-xl"></i></a>
                     </div>
                 </div>
             </div>
@@ -264,28 +267,44 @@
             <div class="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
                 <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2025 VPN Facile. Tous droits réservés.</p>
                 <p class="text-gray-400 text-sm">
-                    <a href="#" class="hover:text-white transition-slow">Mentions légales</a> | 
-                    <a href="#" class="hover:text-white transition-slow">Politique de confidentialité</a> | 
-                    <a href="#" class="hover:text-white transition-slow">Affiliation</a>
+                    <a href="#" class="hover:text-white transition-colors duration-300">Mentions légales</a> | 
+                    <a href="#" class="hover:text-white transition-colors duration-300">Politique de confidentialité</a> | 
+                    <a href="#" class="hover:text-white transition-colors duration-300">Affiliation</a>
                 </p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Mobile menu toggle
-        document.getElementById('menu-toggle').addEventListener('click', function() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        // Toggle mobile menu visibility
+        menuToggle.addEventListener('click', function() {
+            const isExpanded = this.getAttribute('aria-expanded') === 'true' || false;
+            this.setAttribute('aria-expanded', !isExpanded);
+            mobileMenu.classList.toggle('hidden');
         });
-        
-        // Smooth scrolling for all links
+
+        // Close mobile menu on resize for desktop view
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) { // Tailwind's 'md' breakpoint
+                mobileMenu.classList.add('hidden');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        // Smooth scrolling for all links starting with '#'
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 
                 const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
+                if (targetId === '#') {
+                    // Scroll to the very top if href is just "#"
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    return;
+                }
                 
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
@@ -298,4 +317,3 @@
     </script>
 </body>
 </html>
-
